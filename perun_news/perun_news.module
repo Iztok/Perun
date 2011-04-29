@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file
+ * Code for the perun_news feature.
+ */
+
+include_once('perun_news.features.inc');
+
+/**
+ *
+ * News add post form
+ *
+ */
+
+function perun_news_menu() {
+  $items['admin/administer/%/add'] = array(
+    'title' => 'Add news', 
+    'title callback' => 'check_plain', 
+    'page callback' => 'node_add', 
+    'page arguments' => array('news'), 
+    'access arguments' => array('access content'), 
+    'type' => MENU_SUGGESTED_ITEM,
+    'file' => 'node.pages.inc',
+    'file path' => 'modules/node/',
+  );
+  return $items;
+}
+
+function perun_news_add_post() {
+  print "Hello world!";
+}

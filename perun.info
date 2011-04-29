@@ -1,0 +1,6 @@
+name = "Perun"
+description = "Perun - main module"
+package = "Perun"
+core = "7.x"
+
+files[] = perun.module
