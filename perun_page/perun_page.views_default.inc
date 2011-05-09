@@ -1,28 +1,28 @@
 <?php
 /**
  * @file
- * perun_news.views_default.inc
+ * perun_page.views_default.inc
  */
 
 /**
  * Implementation of hook_views_default_views().
  */
-function perun_news_views_default_views() {
+function perun_page_views_default_views() {
   $export = array();
 
   $view = new view;
-  $view->name = 'admin_news';
-  $view->description = 'Administrate content type News';
+  $view->name = 'admin_page';
+  $view->description = 'Administrate content type Basic Page';
   $view->tag = 'admin';
   $view->base_table = 'node';
-  $view->human_name = 'Administer news';
+  $view->human_name = 'Administer pages';
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Administer news';
+  $handler->display->display_options['title'] = 'Administer pages';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -74,7 +74,7 @@ function perun_news_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['override'] = 1;
-  $handler->display->display_options['style_options']['sticky'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['order'] = 'desc';
   $handler->display->display_options['style_options']['empty_table'] = 0;
   /* Field: Content: Nid */
@@ -210,16 +210,14 @@ function perun_news_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['ui_name'] = 'Type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'news' => 'news',
+    'page' => 'page',
   );
-  $handler->display->display_options['filters']['type']['group'] = 0;
   /* Filter criterion: Search by title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['ui_name'] = 'Search by title';
   $handler->display->display_options['filters']['title']['operator'] = 'word';
-  $handler->display->display_options['filters']['title']['group'] = 0;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Search by title';
@@ -227,35 +225,30 @@ function perun_news_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Category */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['ui_name'] = 'Category';
-  $handler->display->display_options['filters']['tid']['group'] = 0;
-  $handler->display->display_options['filters']['tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['tid']['expose']['operator_id'] = 'tid_op';
-  $handler->display->display_options['filters']['tid']['expose']['label'] = 'Category';
-  $handler->display->display_options['filters']['tid']['expose']['operator'] = 'tid_op';
-  $handler->display->display_options['filters']['tid']['expose']['identifier'] = 'cat';
-  $handler->display->display_options['filters']['tid']['expose']['reduce'] = 0;
-  $handler->display->display_options['filters']['tid']['reduce_duplicates'] = 0;
-  $handler->display->display_options['filters']['tid']['type'] = 'select';
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'news_category';
-  $handler->display->display_options['filters']['tid']['hierarchy'] = 1;
-  $handler->display->display_options['filters']['tid']['error_message'] = 1;
+  /* Filter criterion: Search in body */
+  $handler->display->display_options['filters']['body_value']['id'] = 'body_value';
+  $handler->display->display_options['filters']['body_value']['table'] = 'field_data_body';
+  $handler->display->display_options['filters']['body_value']['field'] = 'body_value';
+  $handler->display->display_options['filters']['body_value']['ui_name'] = 'Search in body';
+  $handler->display->display_options['filters']['body_value']['operator'] = 'word';
+  $handler->display->display_options['filters']['body_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['body_value']['expose']['operator_id'] = 'body_value_op';
+  $handler->display->display_options['filters']['body_value']['expose']['label'] = 'Search in body';
+  $handler->display->display_options['filters']['body_value']['expose']['operator'] = 'body_value_op';
+  $handler->display->display_options['filters']['body_value']['expose']['identifier'] = 'body_value';
+  $handler->display->display_options['filters']['body_value']['expose']['required'] = FALSE;
+  $handler->display->display_options['filters']['body_value']['expose']['multiple'] = FALSE;
 
-  /* Display: Adminster news */
-  $handler = $view->new_display('page', 'Adminster news', 'page');
-  $handler->display->display_options['display_description'] = 'Adminster news';
-  $handler->display->display_options['path'] = 'admin/content/news';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'News';
-  $handler->display->display_options['menu']['description'] = 'List news';
-  $handler->display->display_options['menu']['weight'] = '-40';
+  /* Display: Adminster pages */
+  $handler = $view->new_display('page', 'Adminster pages', 'page');
+  $handler->display->display_options['path'] = 'admin/content/pages';
+  $handler->display->display_options['menu']['type'] = 'default tab';
+  $handler->display->display_options['menu']['title'] = 'Pages';
+  $handler->display->display_options['menu']['description'] = 'List pages';
+  $handler->display->display_options['menu']['weight'] = '-50';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['tab_options']['type'] = 'normal';
-  $handler->display->display_options['tab_options']['title'] = 'News';
+  $handler->display->display_options['tab_options']['title'] = 'Content';
   $handler->display->display_options['tab_options']['weight'] = '0';
 
   /* Display: Block */
@@ -271,9 +264,9 @@ function perun_news_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $translatables['admin_news'] = array(
+  $translatables['admin_page'] = array(
     t('Master'),
-    t('Administer news'),
+    t('Administer pages'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -290,12 +283,12 @@ function perun_news_views_default_views() {
     t('Edit'),
     t('Delete'),
     t('Search by title'),
-    t('Category'),
-    t('Adminster news'),
+    t('Search in body'),
+    t('Adminster pages'),
     t('Block'),
     t('admin_news_dashboard'),
   );
-  $export['admin_news'] = $view;
+  $export['admin_page'] = $view;
 
   return $export;
 }

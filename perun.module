@@ -6,3 +6,37 @@
  *
  */
 
+/**
+ * Implementation of hook_install()
+ */
+function perun_install() {
+  $t = get_t();
+  
+  // create new shortcut set perun-shortcut-set-editor
+  $shortcut_set = new stdClass();
+  $shortcut_set->title = $t('Perun editor shortcuts');
+  $shortcut_set->set_name = 'shortcut-set-perun-editor';
+  drupal_write_record('shortcut_set', $shortcut_set);
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function perun_uninstall() {
+  // delete perun shortcuts
+  $shortcut_set = shortcut_set_load('shortcut-set-perun-editor');
+  shortcut_set_delete($shortcut_set);
+}
+
+/**
+ * implementig hook_shortcut_default_set
+ */
+function perun_shortcut_default_set($account) {
+  // Use a special set of default shortcuts for administrators only.
+  
+  return 'shortcut-set-perun-editor';
+}
+
+function perun_init() {
+  //dpm(shortcut_set_load('shortcut-set-perun-editor'));
+}
