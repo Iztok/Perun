@@ -12,7 +12,7 @@ function perun_page_views_default_views() {
 
   $view = new view;
   $view->name = 'admin_page';
-  $view->description = 'Administrate content type Basic Page';
+  $view->description = 'Administrate content of type Basic Page';
   $view->tag = 'admin';
   $view->base_table = 'node';
   $view->human_name = 'Administer pages';
@@ -24,9 +24,11 @@ function perun_page_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Administer pages';
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'edit any page content';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Ponastavi';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -77,7 +79,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['order'] = 'desc';
   $handler->display->display_options['style_options']['empty_table'] = 0;
-  /* Field: Content: Nid */
+  /* Polje: Vsebine: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
@@ -97,7 +99,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['nid']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nid']['link_to_node'] = 0;
-  /* Field: Content: Title */
+  /* Polje: Vsebine: Naslov */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -117,7 +119,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Content: Published */
+  /* Polje: Vsebine: Objavljeno */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
   $handler->display->display_options['fields']['status']['field'] = 'status';
@@ -137,7 +139,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['status']['hide_empty'] = 0;
   $handler->display->display_options['fields']['status']['empty_zero'] = 0;
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Content: Post date */
+  /* Polje: Vsebine: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
@@ -157,7 +159,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['created']['hide_empty'] = 0;
   $handler->display->display_options['fields']['created']['empty_zero'] = 0;
   $handler->display->display_options['fields']['created']['date_format'] = 'long';
-  /* Field: Content: Edit link */
+  /* Polje: Vsebine: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
@@ -177,8 +179,8 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['edit_node']['text'] = 'Edit';
-  /* Field: Content: Delete link */
+  $handler->display->display_options['fields']['edit_node']['text'] = 'Uredi';
+  /* Polje: Vsebine: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
@@ -198,8 +200,8 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['delete_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['delete_node']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['delete_node']['text'] = 'Delete';
-  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['fields']['delete_node']['text'] = 'Izbriši';
+  /* Sort criterion: Vsebine: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
@@ -250,26 +252,12 @@ function perun_page_views_default_views() {
   $handler->display->display_options['tab_options']['type'] = 'normal';
   $handler->display->display_options['tab_options']['title'] = 'Content';
   $handler->display->display_options['tab_options']['weight'] = '0';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'admin_news_dashboard';
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $translatables['admin_page'] = array(
     t('Master'),
     t('Administer pages'),
     t('more'),
     t('Apply'),
-    t('Reset'),
+    t('Ponastavi'),
     t('Sort by'),
     t('Asc'),
     t('Desc'),
@@ -277,16 +265,14 @@ function perun_page_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('Nid'),
-    t('Title'),
-    t('Published'),
+    t('Naslov'),
+    t('Objavljeno'),
     t('Post date'),
-    t('Edit'),
-    t('Delete'),
+    t('Uredi'),
+    t('Izbriši'),
     t('Search by title'),
     t('Search in body'),
     t('Adminster pages'),
-    t('Block'),
-    t('admin_news_dashboard'),
   );
   $export['admin_page'] = $view;
 

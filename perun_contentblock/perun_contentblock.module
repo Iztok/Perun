@@ -15,7 +15,7 @@ function perun_contentblock_install() {
   $link = array(
     'link_path' => 'admin/content/content-block',
     'link_title' => t('Blocks'),
-    'weight' => -30,
+    'weight' => -10,
   );
   $shortcut_set->links[] = $link;
   shortcut_set_save($shortcut_set);

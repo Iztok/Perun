@@ -15,7 +15,7 @@ function perun_news_taxonomy_default_vocabularies() {
       'description' => 'News category',
       'hierarchy' => '0',
       'module' => 'taxonomy',
-      'weight' => '0',
+      'weight' => '-10',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',

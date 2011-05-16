@@ -34,7 +34,7 @@ function perun_news_node_info() {
       'base' => 'node_content',
       'description' => t('Short, usually time related content.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Naslov'),
       'help' => '',
     ),
   );
