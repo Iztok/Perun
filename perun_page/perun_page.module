@@ -13,7 +13,7 @@ function perun_page_install() {
   // add link to projects list in Perun shortcust for editors  
   $shortcut_set = shortcut_set_load('shortcut-set-perun-editor');
   $link = array(
-    'link_path' => 'admin/content/pages',
+    'link_path' => 'admin/content',
     'link_title' => t('Pages'),
     'weight' => -50,
   );
@@ -67,8 +67,4 @@ function perun_page_menu_local_tasks_alter(&$data, $router_item, $root_path) {
 function perun_page_form_page_node_form_alter(&$form, &$form_state, $form_id){
   // titles for creating nodes are hard to translate to Slovenian language, so we customize them
   drupal_set_title(t("Create a new page"));
-}
-
-function perun_page_init() {
-
 }

@@ -1,0 +1,27 @@
+<?php
+/**
+ * @file
+ * Code for the perun_news feature.
+ */
+
+/**
+ * Implementation of hook_install()
+ */
+function perun_comments_install() {
+  // add link to projects list in Perun shortcust for editors
+  $shortcut_set = shortcut_set_load('shortcut-set-perun-editor');
+  $link = array(
+    'link_path' => 'admin/content/comment',
+    'link_title' => t('Comments'),
+    'weight' => 50,
+  );
+  $shortcut_set->links[] = $link;
+  shortcut_set_save($shortcut_set);
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function perun_comments_uninstall() {
+// todo
+}

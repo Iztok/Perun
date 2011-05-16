@@ -1,0 +1,11 @@
+core = "7.x"
+dependencies[] = "perun"
+dependencies[] = "perun_page"
+dependencies[] = "comment"
+description = "Perun Comments feature"
+name = "Perun Comments"
+package = "Perun"
+
+project = "perun_comments"
+version = "7.x-1.0-dev"
+files[] = perun_comments.module

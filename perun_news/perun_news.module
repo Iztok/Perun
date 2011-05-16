@@ -37,7 +37,7 @@ function perun_news_menu_local_tasks_alter(&$data, $router_item, $root_path) {
     $item = menu_get_item('node/add/news');
     
     // change the title of the link
-    $item['title'] = "Add a new post";
+    $item['title'] = "Add a new news post";
     
     if ($item['access']) {
       $data['actions']['output'][] = array(
