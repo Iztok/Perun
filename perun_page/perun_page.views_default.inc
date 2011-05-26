@@ -223,6 +223,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Search by title';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['required'] = FALSE;
@@ -236,6 +237,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['filters']['body_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['body_value']['expose']['operator_id'] = 'body_value_op';
   $handler->display->display_options['filters']['body_value']['expose']['label'] = 'Search in body';
+  $handler->display->display_options['filters']['body_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['body_value']['expose']['operator'] = 'body_value_op';
   $handler->display->display_options['filters']['body_value']['expose']['identifier'] = 'body_value';
   $handler->display->display_options['filters']['body_value']['expose']['required'] = FALSE;

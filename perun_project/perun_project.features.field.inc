@@ -309,83 +309,6 @@ function perun_project_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-project-field_project_link'
-  $fields['node-project-field_project_link'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_project_link',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'module' => 'link',
-      'settings' => array(
-        'attributes' => array(
-          'class' => '',
-          'rel' => '',
-          'target' => 'default',
-        ),
-        'display' => array(
-          'url_cutoff' => 80,
-        ),
-        'enable_tokens' => 1,
-        'title' => 'optional',
-        'title_value' => '',
-        'url' => 0,
-      ),
-      'translatable' => '1',
-      'type' => 'link_field',
-    ),
-    'field_instance' => array(
-      'bundle' => 'project',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'link',
-          'settings' => array(),
-          'type' => 'default',
-          'weight' => 4,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_project_link',
-      'label' => 'Project link',
-      'required' => 0,
-      'settings' => array(
-        'attributes' => array(
-          'class' => '',
-          'rel' => '',
-          'target' => 'default',
-        ),
-        'display' => array(
-          'url_cutoff' => '80',
-        ),
-        'enable_tokens' => 1,
-        'title' => 'optional',
-        'title_value' => '',
-        'url' => 0,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_field',
-        'weight' => '1',
-      ),
-    ),
-  );
-
   // Exported field: 'node-project-field_project_type'
   $fields['node-project-field_project_type'] = array(
     'field_config' => array(
@@ -451,7 +374,7 @@ function perun_project_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '3',
+        'weight' => '-3',
       ),
     ),
   );
@@ -462,7 +385,6 @@ function perun_project_field_default_fields() {
   t('Client');
   t('Image gallery');
   t('Main image');
-  t('Project link');
   t('Type');
 
   return $fields;
