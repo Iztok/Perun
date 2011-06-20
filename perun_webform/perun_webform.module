@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Code for the Perun webform feature.
+ */
+
+include_once('perun_webform.features.inc');
+
+/**
+ * Implementation of hook_install()
+ */
+function perun_webform_install() {
+  // add link to projects list in Perun shortcust for editors
+  $shortcut_set = shortcut_set_load('shortcut-set-perun-editor');
+  $link = array(
+    'link_path' => 'admin/content/webforms',
+    'link_title' => t('Webforms'),
+    'weight' => -20,
+  );
+  $shortcut_set->links[] = $link;
+  shortcut_set_save($shortcut_set);
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function perun_webform_uninstall() {
+// todo
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function perun_webform_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link to 'node/add' on 'admin/content/*' page.
+  if ($root_path == 'admin/content/webforms') { 
+    $item = menu_get_item('node/add/webform');
+    
+    // change the title of the link
+    $item['title'] = "Add a new webform";
+    
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter()
+ */
+function perun_webform_form_news_node_form_alter(&$form, &$form_state, $form_id){
+  // titles for creating nodes are hard to translate to Slovenian language, so we customize them
+  drupal_set_title(t("Create a new webform"));
+}

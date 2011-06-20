@@ -1,30 +1,30 @@
 <?php
 /**
  * @file
- * perun_page.views_default.inc
+ * perun_event.views_default.inc
  */
 
 /**
  * Implementation of hook_views_default_views().
  */
-function perun_page_views_default_views() {
+function perun_event_views_default_views() {
   $export = array();
 
   $view = new view;
-  $view->name = 'admin_page';
-  $view->description = 'Administrate content of type Basic Page';
+  $view->name = 'admin_event';
+  $view->description = 'Administrate content of type Event';
   $view->tag = 'admin';
   $view->base_table = 'node';
-  $view->human_name = 'Administer pages';
+  $view->human_name = 'admin_event';
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Administer pages';
+  $handler->display->display_options['title'] = 'Administer events';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'edit any page content';
+  $handler->display->display_options['access']['perm'] = 'edit any perun_event content';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -35,6 +35,7 @@ function perun_page_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'nid' => 'nid',
     'title' => 'title',
+    'field_event_date' => 'field_event_date',
     'status' => 'status',
     'created' => 'created',
     'edit_node' => 'edit_node',
@@ -49,6 +50,12 @@ function perun_page_views_default_views() {
       'separator' => '',
     ),
     'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
+    'field_event_date' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -76,7 +83,7 @@ function perun_page_views_default_views() {
     ),
   );
   $handler->display->display_options['style_options']['override'] = 1;
-  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['sticky'] = 1;
   $handler->display->display_options['style_options']['order'] = 'desc';
   $handler->display->display_options['style_options']['empty_table'] = 0;
   /* Polje: Vsebine: Nid */
@@ -119,6 +126,36 @@ function perun_page_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  /* Polje: Vsebine: Date and time */
+  $handler->display->display_options['fields']['field_event_date']['id'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['fields']['field_event_date']['field'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date']['label'] = 'Date of event';
+  $handler->display->display_options['fields']['field_event_date']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_event_date']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_event_date']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_event_date']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_event_date']['type'] = 'date_short';
+  $handler->display->display_options['fields']['field_event_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
+  $handler->display->display_options['fields']['field_event_date']['field_api_classes'] = 0;
   /* Polje: Vsebine: Objavljeno */
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 'node';
@@ -206,20 +243,13 @@ function perun_page_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['ui_name'] = 'Type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'page' => 'page',
-  );
   /* Filter criterion: Search by title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['ui_name'] = 'Search by title';
   $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['group'] = 0;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Search by title';
@@ -227,34 +257,31 @@ function perun_page_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Search in body */
-  $handler->display->display_options['filters']['body_value']['id'] = 'body_value';
-  $handler->display->display_options['filters']['body_value']['table'] = 'field_data_body';
-  $handler->display->display_options['filters']['body_value']['field'] = 'body_value';
-  $handler->display->display_options['filters']['body_value']['ui_name'] = 'Search in body';
-  $handler->display->display_options['filters']['body_value']['operator'] = 'word';
-  $handler->display->display_options['filters']['body_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['body_value']['expose']['operator_id'] = 'body_value_op';
-  $handler->display->display_options['filters']['body_value']['expose']['label'] = 'Search in body';
-  $handler->display->display_options['filters']['body_value']['expose']['operator'] = 'body_value_op';
-  $handler->display->display_options['filters']['body_value']['expose']['identifier'] = 'body_value';
-  $handler->display->display_options['filters']['body_value']['expose']['required'] = FALSE;
-  $handler->display->display_options['filters']['body_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['ui_name'] = 'Type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'event' => 'event',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 0;
 
-  /* Display: Adminster pages */
-  $handler = $view->new_display('page', 'Adminster pages', 'page');
-  $handler->display->display_options['path'] = 'admin/content/pages';
-  $handler->display->display_options['menu']['type'] = 'default tab';
-  $handler->display->display_options['menu']['title'] = 'Pages';
-  $handler->display->display_options['menu']['description'] = 'List pages';
-  $handler->display->display_options['menu']['weight'] = '-50';
+  /* Display: Adminster events */
+  $handler = $view->new_display('page', 'Adminster events', 'page');
+  $handler->display->display_options['display_description'] = 'Adminster events';
+  $handler->display->display_options['path'] = 'admin/content/events';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Events';
+  $handler->display->display_options['menu']['description'] = 'List events';
+  $handler->display->display_options['menu']['weight'] = '-20';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['tab_options']['type'] = 'normal';
-  $handler->display->display_options['tab_options']['title'] = 'Content';
+  $handler->display->display_options['tab_options']['title'] = 'News';
   $handler->display->display_options['tab_options']['weight'] = '0';
-  $translatables['admin_page'] = array(
+  $translatables['admin_event'] = array(
     t('Master'),
-    t('Administer pages'),
+    t('Administer events'),
     t('more'),
     t('Apply'),
     t('Ponastavi'),
@@ -266,15 +293,15 @@ function perun_page_views_default_views() {
     t('Offset'),
     t('Nid'),
     t('Naslov'),
+    t('Date of event'),
     t('Objavljeno'),
     t('Post date'),
     t('Uredi'),
     t('Izbriši'),
     t('Search by title'),
-    t('Search in body'),
-    t('Adminster pages'),
+    t('Adminster events'),
   );
-  $export['admin_page'] = $view;
+  $export['admin_event'] = $view;
 
   return $export;
 }
